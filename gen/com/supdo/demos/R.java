@@ -36,6 +36,7 @@ public final class R {
         public static final int login_form=0x7f080002;
         public static final int login_status=0x7f080000;
         public static final int login_status_message=0x7f080001;
+        public static final int menu_logout=0x7f08000f;
         public static final int pager=0x7f08000a;
         public static final int pager_title_strip=0x7f08000b;
         public static final int password=0x7f080005;
@@ -52,7 +53,10 @@ public final class R {
         public static final int main=0x7f070001;
     }
     public static final class string {
+        public static final int action_forget_password=0x7f050014;
         public static final int action_forgot_password=0x7f05000d;
+        public static final int action_menu_logout=0x7f050008;
+        public static final int action_new_register=0x7f050013;
         public static final int action_settings=0x7f050001;
         public static final int action_sign_in_register=0x7f05000b;
         public static final int action_sign_in_short=0x7f05000c;
@@ -62,11 +66,11 @@ public final class R {
         public static final int error_invalid_email=0x7f05000f;
         public static final int error_invalid_password=0x7f050010;
         public static final int login_progress_signing_in=0x7f05000e;
-        /**  Strings related to login 
+        /**  <string name="title_activity_login">登陆</string> 
+ Strings related to login 
          */
         public static final int prompt_email=0x7f050009;
         public static final int prompt_password=0x7f05000a;
-        public static final int title_activity_login=0x7f050008;
         public static final int title_section1=0x7f050002;
         public static final int title_section2=0x7f050003;
         public static final int title_section3=0x7f050004;

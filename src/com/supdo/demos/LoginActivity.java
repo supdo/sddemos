@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -56,6 +57,14 @@ public class LoginActivity extends Activity {
 		
 		//隐藏标题栏
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+		String email = userInfo.getString("email", "");
+		if(email.length()>0){
+			Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+			startActivity(intent);
+			finish();
+		}
 
 		setContentView(R.layout.activity_login);
 
@@ -224,6 +233,11 @@ public class LoginActivity extends Activity {
 			
 			if(this.mEmail.getText().toString().equals("quke@") &&
 					this.mPassword.getText().toString().equals("123456")){
+					SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+					SharedPreferences.Editor userInfoEditor = userInfo.edit();
+					userInfoEditor.putString("email", this.mEmail.getText().toString());
+					userInfoEditor.putString("password", this.mPassword.getText().toString());
+					userInfoEditor.commit();
 				return true;
 			}else{
 				return false;

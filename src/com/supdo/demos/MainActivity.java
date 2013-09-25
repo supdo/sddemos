@@ -2,6 +2,10 @@ package com.supdo.demos;
 
 import java.util.Locale;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -55,6 +59,50 @@ public class MainActivity extends FragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+	        case R.id.menu_logout:
+	        	Logout();
+	            break;
+	        default:
+	            break;
+	    }
+	    return true;
+	};
+	
+	private void Logout(){
+		AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
+    	dlgBuilder.setMessage("确认退出吗？");
+    	dlgBuilder.setTitle("提示");
+    	dlgBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+				SharedPreferences userInfo = getSharedPreferences("user_info", 0);
+				SharedPreferences.Editor userInfoEditor = userInfo.edit();
+				userInfoEditor.putString("email", "");
+				userInfoEditor.commit();
+				
+				Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+				startActivity(intent);
+				
+				MainActivity.this.finish();
+			}
+		});
+    	
+    	dlgBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    	dlgBuilder.show();
 	}
 
 	/**
