@@ -1,17 +1,17 @@
 package com.supdo.demos;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,39 +19,106 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
-
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	ViewPager mViewPager;
-
+public class MainActivity extends Activity {
+	
+	private ViewPager mViewPager;
+	private PagerTitleStrip mPagerTitle;
+	private ArrayList<View> views;
+	private ArrayList<String> titles;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//隐藏标题栏
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the app.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mPagerTitle = (PagerTitleStrip)findViewById(R.id.pager_title);
 
+		//将要分页显示的View装入数组中
+        LayoutInflater mLists = LayoutInflater.from(this);
+        View mListView1 = mLists.inflate(R.layout.activity_list_1, null);
+        View mDummyView1 = mLists.inflate(R.layout.fragment_main_dummy, null);
+        
+        //每个页面的Title数据
+        views = new ArrayList<View>();
+        views.add(mListView1);
+        views.add(mDummyView1);
+        
+        titles = new ArrayList<String>();
+        titles.add("列表内容");
+        titles.add("Dummy内容");
+        
+      //填充ViewPager的数据适配器
+        PagerAdapter mPagerAdapter = new PagerAdapter() {
+			
+			@Override
+			public boolean isViewFromObject(View arg0, Object arg1) {
+				return arg0 == arg1;
+			}
+			
+			@Override
+			public int getCount() {
+				return views.size();
+			}
+
+			@Override
+			public void destroyItem(View container, int position, Object object) {
+				((ViewPager)container).removeView(views.get(position));
+			}
+
+			@Override
+			public CharSequence getPageTitle(int position) {
+				return titles.get(position);
+			}
+
+			@Override
+			public Object instantiateItem(View container, int position) {
+				((ViewPager)container).addView(views.get(position));
+				return views.get(position);
+			}
+		};
+		
+        
+        mViewPager.setAdapter(mPagerAdapter);
+	}
+	
+	public class mPagerAdapter extends PagerAdapter{
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return views.size();
+		}
+
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			// TODO Auto-generated method stub
+			return arg0 == arg1;
+		}
+		
+		@Override
+		public void destroyItem(View container, int position, Object object) {
+			((ViewPager)container).removeView(views.get(position));
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return titles.get(position);
+		}
+
+		@Override
+		public Object instantiateItem(View container, int position) {
+			((ViewPager)container).addView(views.get(position));
+			return views.get(position);
+		}
+	
 	}
 
 	@Override
@@ -104,81 +171,4 @@ public class MainActivity extends FragmentActivity {
 		});
     	dlgBuilder.show();
 	}
-
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@Override
-		public int getCount() {
-			// Show 3 total pages.
-			return 6;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			case 3:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 4:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 5:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
-		}
-	}
-
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public DummySectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
-					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-
 }
