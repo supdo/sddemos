@@ -29,6 +29,7 @@
             android:name="com.supdo.demos.MainActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity android:name="ListActivity" android:label="@string/app_name"></activity>
     </application>
 
 </manifest>

@@ -26,28 +26,32 @@ public final class R {
         public static final int login_logo=0x7f020002;
     }
     public static final class id {
-        public static final int action_forgot_password=0x7f08000d;
-        public static final int action_settings=0x7f08000e;
-        public static final int btnForgetPwd=0x7f080009;
-        public static final int btnRegister=0x7f080008;
-        public static final int email=0x7f080004;
-        public static final int imageView1=0x7f080003;
-        public static final int login=0x7f080006;
-        public static final int login_form=0x7f080002;
-        public static final int login_status=0x7f080000;
-        public static final int login_status_message=0x7f080001;
-        public static final int menu_logout=0x7f08000f;
-        public static final int pager=0x7f08000a;
-        public static final int pager_title=0x7f08000b;
-        public static final int password=0x7f080005;
-        public static final int section_label=0x7f08000c;
-        public static final int sign_in_button=0x7f080007;
+        public static final int action_forgot_password=0x7f080010;
+        public static final int action_settings=0x7f080011;
+        public static final int btnForgetPwd=0x7f08000a;
+        public static final int btnRegister=0x7f080009;
+        public static final int email=0x7f080005;
+        public static final int imageView1=0x7f080004;
+        public static final int login=0x7f080007;
+        public static final int login_form=0x7f080003;
+        public static final int login_status=0x7f080001;
+        public static final int login_status_message=0x7f080002;
+        public static final int lv_list1=0x7f080000;
+        public static final int menu_logout=0x7f080012;
+        public static final int pager=0x7f08000b;
+        public static final int pager_title=0x7f08000c;
+        public static final int password=0x7f080006;
+        public static final int section_label=0x7f08000d;
+        public static final int sign_in_button=0x7f080008;
+        public static final int tv_list_age=0x7f08000f;
+        public static final int tv_list_name=0x7f08000e;
     }
     public static final class layout {
         public static final int activity_list_1=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_main=0x7f030002;
         public static final int fragment_main_dummy=0x7f030003;
+        public static final int list_info=0x7f030004;
     }
     public static final class menu {
         public static final int login=0x7f070000;
