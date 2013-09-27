@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-import com.supdo.demos.TestMainActivity.DummySectionFragment;
-import com.supdo.demos.TestMainActivity.SectionsPagerAdapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -53,7 +51,7 @@ public class MainActivity extends FragmentActivity {
 	private ArrayList<String> titles;
 	//private AlertDialog.Builder dlgBder;
 	
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	//SectionsPagerAdapter mSectionsPagerAdapter;
 	
 	private Button btnNewUser;
 	
@@ -112,18 +110,17 @@ public class MainActivity extends FragmentActivity {
 				((ViewPager)container).addView(views.get(position));
 				switch (position) {
 				case 0:
-					//initalList(views.get(position));
-					ListActivity listPaer = new ListActivity();
-					return listPaer.getLayoutInflater();
+					initalList(views.get(position));
 				}
 				return views.get(position);
 			}
 		};
 		
-        
+		//mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
 	}
 	
+	/**
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -135,57 +132,142 @@ public class MainActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+			//Fragment fragment = new DummySectionFragment();
+			//return fragment;
+			switch (position) {
+			case 0:
+				return new ListFragment();
+			case 1:
+				return new DummySectionFragment();
+			}
+			return null;
 		}
 
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 2;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
-			}
-			return null;
+			return titles.get(position);
 		}
 	}
 	
 	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
 		public DummySectionFragment() {
 		}
-
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_test_main_dummy,
+			View rootView = inflater.inflate(R.layout.fragment_main_dummy,
 					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
 			return rootView;
 		}
 	}
 	
+	public static class ListFragment extends Fragment {
+		public ListFragment() {
+		}
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			final Activity parentActivity = this.getActivity();
+			final View view = inflater.inflate(R.layout.activity_list_1,
+					container, false);
+			Button btnNewUser = (Button)view.findViewById(R.id.btnNewUser);
+			btnNewUser.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Intent intent = new Intent(view.getContext(), NewUserActivity.class);
+					startActivity(intent);
+				}
+			});
+			
+			final ListView lvList = (ListView)view. findViewById(R.id.lv_list1);
+			final ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
+			HashMap<String, String> mapTitle = new HashMap<String , String>();
+			mapTitle.put("name", "姓名");
+			mapTitle.put("age", "年龄");
+			listData.add(mapTitle);
+			for (int i = 0; i < 20; i++) {
+				HashMap<String, String> map = new HashMap<String , String>();
+				map.put("name", "name-"+String.valueOf(i));
+				map.put("age", String.valueOf(i+20));
+				listData.add(map);
+			}
+			final SimpleAdapter listItemAdapter = new SimpleAdapter(view.getContext(), listData,  // 数据源
+					R.layout.list_info,  // ListItem的XML实现
+					new String[] { "name", "age" },  // 动态数组与ImageItem对应的子项
+					new int[] { R.id.tv_list_name, R.id.tv_list_age }  // list_items中对应的的ImageView和TextView
+			);
+			
+			// 绑定数据源
+			lvList.setAdapter(listItemAdapter);
+			
+			lvList.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+					// TODO Auto-generated method stub
+					view.setBackgroundColor(Color.BLUE);
+					TextView tvName = (TextView)view.findViewById(R.id.tv_list_name);
+					String strName = tvName.getText().toString();
+					AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(parentActivity); 
+							dlgBuilder.setTitle("提示")
+							.setMessage("你点击了："+strName)
+							.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+
+								@Override
+								public void onClick(DialogInterface arg0, int arg1) {
+									// TODO Auto-generated method stub
+									view.setBackgroundColor(0xEEEEEE);
+								}
+							})
+							.show();
+				}
+			});
+			
+			lvList.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+					// TODO Auto-generated method stub
+					view.setBackgroundColor(Color.BLUE);
+					TextView tvName = (TextView)view.findViewById(R.id.tv_list_name);
+					String strName = tvName.getText().toString();
+					AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(parentActivity); 
+					dlgBuilder.setTitle("提示")
+					.setMessage("你确定要删除："+strName+"吗？")
+					.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							listData.remove(position);
+							//lvList.removeView(view);
+							listItemAdapter.notifyDataSetChanged();
+							//lvList.invalidate();
+							view.setBackgroundColor(0xEEEEEE);
+						}
+					})
+					.setNegativeButton("取消", new DialogInterface.OnClickListener(){
+
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							// TODO Auto-generated method stub
+							//view.setBackgroundColor(Color.WHITE);
+							view.setBackgroundColor(0xEEEEEE);
+						}
+					})
+					.show();
+					return true;
+				}
+			});
+			return view;
+		}
+	}
+**/	
 	private void initalList(View view){
 		
 		btnNewUser = (Button)view.findViewById(R.id.btnNewUser);
@@ -194,7 +276,8 @@ public class MainActivity extends FragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
-				startActivity(intent);
+				//startActivity(intent);
+				startActivityForResult(intent, 101);
 			}
 		});
 		
@@ -212,8 +295,8 @@ public class MainActivity extends FragmentActivity {
 		}
 		listItemAdapter = new SimpleAdapter(this, listData,  // 数据源
 				R.layout.list_info,  // ListItem的XML实现
-				new String[] { "name", "age" },  // 动态数组与ImageItem对应的子项
-				new int[] { R.id.tv_list_name, R.id.tv_list_age }  // list_items中对应的的ImageView和TextView
+				new String[] { "name", "age", "phone" },  // 动态数组与ImageItem对应的子项
+				new int[] { R.id.tv_list_name, R.id.tv_list_age, R.id.tv_list_phoneNum }  // list_items中对应的的ImageView和TextView
 		);
 		
 		// 绑定数据源
@@ -280,6 +363,27 @@ public class MainActivity extends FragmentActivity {
 		
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		if(requestCode == 101){
+			if(resultCode == RESULT_OK){
+				
+				HashMap<String, String> map = new HashMap<String , String>();
+				map.put("name", "新增用户");
+				map.put("age", "30");
+				map.put("phone", "18639551256");
+				listData.add(map);
+				listItemAdapter.notifyDataSetChanged();
+				
+				AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
+		    	dlgBuilder.setMessage("添加成功！");
+		    	dlgBuilder.setTitle("提示");
+		    	dlgBuilder.setNegativeButton("确定", null);
+		    	dlgBuilder.show();
+			}
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

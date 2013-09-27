@@ -25,7 +25,8 @@ public class NewUserActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(NewUserActivity.this, MainActivity.class);
-				startActivity(intent);
+				//startActivity(intent);
+				setResult(RESULT_OK, intent);
 				finish();
 			}
 		});
