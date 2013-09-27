@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_user_form"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EEEEEE"
+    tools:context=".NewUserActivity" >
+
+    <LinearLayout
+        android:id="@+id/NewUserFormContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/etNewUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="用户名"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/etNewUserAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="年龄"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etNewUserComp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="公司" />
+
+        <Spinner
+            android:id="@+id/spnNewUserSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="性别"
+            android:entries="@array/user_sex" />
+
+        <EditText
+            android:id="@+id/etNewUserPhoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="电话号码"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/btnNewUserOK"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="提交" />
+
+    </LinearLayout>
+
+</ScrollView>

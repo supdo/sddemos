@@ -4,18 +4,25 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="8dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:paddingTop="8dp" >
 
     <TextView
         android:id="@+id/tv_list_name"
-        android:layout_width="200dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/tv_list_age"
-        android:layout_width="200dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tv_list_phoneNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

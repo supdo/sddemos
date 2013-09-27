@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import com.supdo.demos.TestMainActivity.DummySectionFragment;
+import com.supdo.demos.TestMainActivity.SectionsPagerAdapter;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +14,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
@@ -29,17 +36,26 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 	
+	private PagerAdapter mPagerAdapter;
+	private SimpleAdapter listItemAdapter;
+	private ArrayList<HashMap<String, String>> listData;
+	private ListView lvList;
 	private ViewPager mViewPager;
 	private PagerTitleStrip mPagerTitle;
 	private ArrayList<View> views;
 	private ArrayList<String> titles;
-	private AlertDialog.Builder dlgBder;
+	//private AlertDialog.Builder dlgBder;
+	
+	SectionsPagerAdapter mSectionsPagerAdapter;
+	
+	private Button btnNewUser;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +64,7 @@ public class MainActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		
-		dlgBder = new AlertDialog.Builder(this);
-		
+		//dlgBder = new AlertDialog.Builder(this);
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -70,7 +85,7 @@ public class MainActivity extends Activity {
         titles.add("Dummy内容");
         
       //填充ViewPager的数据适配器
-        PagerAdapter mPagerAdapter = new PagerAdapter() {
+        mPagerAdapter = new PagerAdapter() {
 			
 			@Override
 			public boolean isViewFromObject(View arg0, Object arg1) {
@@ -97,8 +112,9 @@ public class MainActivity extends Activity {
 				((ViewPager)container).addView(views.get(position));
 				switch (position) {
 				case 0:
-					initalList();
-					break;
+					//initalList(views.get(position));
+					ListActivity listPaer = new ListActivity();
+					return listPaer.getLayoutInflater();
 				}
 				return views.get(position);
 			}
@@ -108,9 +124,82 @@ public class MainActivity extends Activity {
         mViewPager.setAdapter(mPagerAdapter);
 	}
 	
-	private void initalList(){
-		final ListView lvList = (ListView) findViewById(R.id.lv_list1);
-		ArrayList<HashMap<String, String>> listData = new ArrayList<HashMap<String, String>>();
+	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+		public SectionsPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			// getItem is called to instantiate the fragment for the given page.
+			// Return a DummySectionFragment (defined as a static inner class
+			// below) with the page number as its lone argument.
+			Fragment fragment = new DummySectionFragment();
+			Bundle args = new Bundle();
+			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+			fragment.setArguments(args);
+			return fragment;
+		}
+
+		@Override
+		public int getCount() {
+			// Show 3 total pages.
+			return 3;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			Locale l = Locale.getDefault();
+			switch (position) {
+			case 0:
+				return getString(R.string.title_section1).toUpperCase(l);
+			case 1:
+				return getString(R.string.title_section2).toUpperCase(l);
+			case 2:
+				return getString(R.string.title_section3).toUpperCase(l);
+			}
+			return null;
+		}
+	}
+	
+	public static class DummySectionFragment extends Fragment {
+		/**
+		 * The fragment argument representing the section number for this
+		 * fragment.
+		 */
+		public static final String ARG_SECTION_NUMBER = "section_number";
+
+		public DummySectionFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_test_main_dummy,
+					container, false);
+			TextView dummyTextView = (TextView) rootView
+					.findViewById(R.id.section_label);
+			dummyTextView.setText(Integer.toString(getArguments().getInt(
+					ARG_SECTION_NUMBER)));
+			return rootView;
+		}
+	}
+	
+	private void initalList(View view){
+		
+		btnNewUser = (Button)view.findViewById(R.id.btnNewUser);
+		btnNewUser.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		lvList = (ListView) findViewById(R.id.lv_list1);
+		listData = new ArrayList<HashMap<String, String>>();
 		HashMap<String, String> mapTitle = new HashMap<String , String>();
 		mapTitle.put("name", "姓名");
 		mapTitle.put("age", "年龄");
@@ -121,7 +210,7 @@ public class MainActivity extends Activity {
 			map.put("age", String.valueOf(i+20));
 			listData.add(map);
 		}
-		SimpleAdapter listItemAdapter = new SimpleAdapter(this, listData,  // 数据源
+		listItemAdapter = new SimpleAdapter(this, listData,  // 数据源
 				R.layout.list_info,  // ListItem的XML实现
 				new String[] { "name", "age" },  // 动态数组与ImageItem对应的子项
 				new int[] { R.id.tv_list_name, R.id.tv_list_age }  // list_items中对应的的ImageView和TextView
@@ -137,14 +226,15 @@ public class MainActivity extends Activity {
 				view.setBackgroundColor(Color.BLUE);
 				TextView tvName = (TextView)view.findViewById(R.id.tv_list_name);
 				String strName = tvName.getText().toString();
-				dlgBder.setTitle("提示")
+				AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(MainActivity.this); 
+						dlgBuilder.setTitle("提示")
 						.setMessage("你点击了："+strName)
-						.setNegativeButton("确定", new DialogInterface.OnClickListener(){
+						.setNegativeButton("取消", new DialogInterface.OnClickListener(){
 
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
 								// TODO Auto-generated method stub
-								view.setBackgroundColor(Color.WHITE);
+								view.setBackgroundColor(0xEEEEEE);
 							}
 						})
 						.show();
@@ -159,16 +249,18 @@ public class MainActivity extends Activity {
 				view.setBackgroundColor(Color.BLUE);
 				TextView tvName = (TextView)view.findViewById(R.id.tv_list_name);
 				String strName = tvName.getText().toString();
-				dlgBder.setTitle("提示")
+				AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(MainActivity.this); 
+				dlgBuilder.setTitle("提示")
 				.setMessage("你确定要删除："+strName+"吗？")
 				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						//view.remo
-						//mViewPager.getAdapter().getItemPosition(object)
-						mViewPager.getAdapter().notifyDataSetChanged();
-						lvList.invalidate();
+						listData.remove(position);
+						//lvList.removeView(view);
+						listItemAdapter.notifyDataSetChanged();
+						//lvList.invalidate();
+						view.setBackgroundColor(0xEEEEEE);
 					}
 				})
 				.setNegativeButton("取消", new DialogInterface.OnClickListener(){
@@ -176,13 +268,16 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 						// TODO Auto-generated method stub
-						view.setBackgroundColor(Color.WHITE);
+						//view.setBackgroundColor(Color.WHITE);
+						view.setBackgroundColor(0xEEEEEE);
 					}
 				})
 				.show();
-				return false;
+				return true;
 			}
 		});
+		
+		
 	}
 
 	@Override
