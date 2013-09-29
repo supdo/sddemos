@@ -8,10 +8,13 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -185,6 +188,7 @@ public class MainActivity extends FragmentActivity  {
 								}).show();*/
 				
 				showUserInfoDialog(userid);
+				view.setBackgroundColor(0xEEEEEE);
 			}
 		});
 		
@@ -338,68 +342,80 @@ public class MainActivity extends FragmentActivity  {
 	}
 	
 	protected void showUserInfoDialog(int id) {
-		
-        // Create and show the dialog. 
 		if(userinfoDialog == null){
 			userinfoDialog = new UserInfoDialog();
 		}
-		
-			Bundle args = new Bundle();
-			args.putInt("userid", id);
-			userinfoDialog.setArguments(args);
-			//userinfoDialog.setInfoById(id);
-		
-		//userinfoDialog.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+		Bundle args = new Bundle();
+		args.putInt("userid", id);
+		userinfoDialog.setArguments(args);
 		userinfoDialog.show(getSupportFragmentManager(), "dialog");
 	}
 	
 	@SuppressLint("ValidFragment")
 	public class UserInfoDialog extends DialogFragment {
 
+		private View view;
 		private TextView tvUserName;
 		private TextView tvAge;
-		private Button btnCancel;
+		private TextView tvSex;
+		private TextView tvComp;
+		private TextView tvPhoneNum;
+		private Button btnSMS;
+		private Button btnPhone;
 		private int userid;
 
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			
-			userid = getArguments().getInt("userid");
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View v = inflater.inflate(R.layout.userinfo_show, container, false);
-			// 初始化控件
-			tvUserName = (TextView)v.findViewById(R.id.tvUserName);
-			tvAge = (TextView)v.findViewById(R.id.tvAge);
-			
-			setInfoById(userid);
-			
-			btnCancel = (Button) v.findViewById(R.id.btnCancel);
-			btnCancel.setOnClickListener(new Button.OnClickListener() {
+		private void initialData(){
+			view = getActivity().getLayoutInflater().inflate(R.layout.userinfo_show, null);
+			tvUserName = (TextView)view.findViewById(R.id.tvUserName);
+			tvAge = (TextView)view.findViewById(R.id.tvAge);
+			tvSex = (TextView)view.findViewById(R.id.tvSex);
+			tvComp = (TextView)view.findViewById(R.id.tvComp);
+			tvPhoneNum = (TextView)view.findViewById(R.id.tvPhone);
+			btnSMS = (Button)view.findViewById(R.id.btnSMS);
+			btnPhone = (Button)view.findViewById(R.id.btnPhone);
+			btnSMS.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(View arg0) {
-					// 关闭对话框
-					dismiss();
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+tvPhoneNum.getText().toString()));
+					intent.putExtra("sms_body", "102");
+					startActivity(intent); 
 				}
 			});
-			return v;
-		}
-		
-		public void setInfoById(int id){
-	
+			btnPhone.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tvPhoneNum.getText().toString()));
+					startActivity(intent);
+				}
+			});
+			
+			userid = getArguments().getInt("userid");
 			try {
 				usersDao = dataHelper.getUserDao();
-				Users user = usersDao.queryForId(id);
+				Users user = usersDao.queryForId(userid);
 				tvUserName.setText(user.getName());
 				tvAge.setText(String.valueOf(user.getAge()));
+				String strSex = this.getResources().getStringArray(R.array.user_sex)[user.getSex()];
+				tvSex.setText(strSex);
+				tvComp.setText(user.getCompany());
+				tvPhoneNum.setText(user.getPhoneNum());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			initialData();
+			Builder retDlg = new AlertDialog.Builder(getActivity());		    
+			retDlg.setView(view);
+			retDlg.setTitle("用户信息")
+			//.setPositiveButton("OK", null)
+			//.setNegativeButton("取消", null)
+			;
+			
+			return retDlg.create();
 		}
 	}
 }
