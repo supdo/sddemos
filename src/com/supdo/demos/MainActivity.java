@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +13,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
@@ -19,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,20 +36,30 @@ import com.j256.ormlite.dao.Dao;
 import com.supdo.demos.orm.DataHelper;
 import com.supdo.demos.orm.Users;
 
-public class MainActivity extends Activity {
+//@SuppressLint("ValidFragment")
+public class MainActivity extends FragmentActivity  {
 	
-	private PagerAdapter mPagerAdapter;
+	//界面元素
+	private ViewPager mViewPager;
+	private PagerTitleStrip mPagerTitle;
+	private View mListView1;
+	private View mDummyView1;
+	
+	private LayoutInflater mLists;
+	
+	
 	private SimpleAdapter listItemAdapter;
 	private ArrayList<HashMap<String, Object>> listData;
 	private ListView lvList;
-	private ViewPager mViewPager;
-	private PagerTitleStrip mPagerTitle;
+	
 	private ArrayList<View> views;
 	private ArrayList<String> titles;
 	private DataHelper dataHelper;
 	private Dao<Users, Integer> usersDao;
 	
 	private Button btnNewUser;
+	
+	private UserInfoDialog userinfoDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +68,22 @@ public class MainActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		
-		dataHelper = new DataHelper(MainActivity.this);
-		
-		// Set up the ViewPager with the sections adapter.
+		findViews();
+		initialActivity();
+	}
+	
+	private void findViews(){
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mPagerTitle = (PagerTitleStrip)findViewById(R.id.pager_title);
+	}
+	
+	private void initialActivity(){
+		dataHelper = new DataHelper(MainActivity.this);
 
 		//将要分页显示的View装入数组中
-        LayoutInflater mLists = LayoutInflater.from(this);
-        View mListView1 = mLists.inflate(R.layout.activity_list_1, null);
-        View mDummyView1 = mLists.inflate(R.layout.fragment_main_dummy, null);
-        
+        mLists = LayoutInflater.from(this);
+        mListView1 = mLists.inflate(R.layout.activity_list_1, null);
+        mDummyView1 = mLists.inflate(R.layout.fragment_main_dummy, null);
         //每个页面的Title数据
         views = new ArrayList<View>();
         views.add(mListView1);
@@ -74,41 +93,41 @@ public class MainActivity extends Activity {
         titles.add("列表内容");
         titles.add("Dummy内容");
         
-      //填充ViewPager的数据适配器
-        mPagerAdapter = new PagerAdapter() {
-			
-			@Override
-			public boolean isViewFromObject(View arg0, Object arg1) {
-				return arg0 == arg1;
-			}
-			
-			@Override
-			public int getCount() {
-				return views.size();
-			}
-
-			@Override
-			public void destroyItem(View container, int position, Object object) {
-				((ViewPager)container).removeView(views.get(position));
-			}
-
-			@Override
-			public CharSequence getPageTitle(int position) {
-				return titles.get(position);
-			}
-
-			@Override
-			public Object instantiateItem(View container, int position) {
-				((ViewPager)container).addView(views.get(position));
-				switch (position) {
-				case 0:
-					initalList(views.get(position));
-				}
-				return views.get(position);
-			}
-		};
         mViewPager.setAdapter(mPagerAdapter);
 	}
+	
+	private PagerAdapter mPagerAdapter = new PagerAdapter() {
+		
+		@Override
+		public boolean isViewFromObject(View arg0, Object arg1) {
+			return arg0 == arg1;
+		}
+		
+		@Override
+		public int getCount() {
+			return views.size();
+		}
+
+		@Override
+		public void destroyItem(View container, int position, Object object) {
+			((ViewPager)container).removeView(views.get(position));
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return titles.get(position);
+		}
+
+		@Override
+		public Object instantiateItem(View container, int position) {
+			((ViewPager)container).addView(views.get(position));
+			switch (position) {
+			case 0:
+				initalList(views.get(position));
+			}
+			return views.get(position);
+		}
+	};
 	
 	private void initalList(View view){
 		btnNewUser = (Button)view.findViewById(R.id.btnNewUser);
@@ -143,8 +162,11 @@ public class MainActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				TextView tvUserID = (TextView) view
+						.findViewById(R.id.tv_list_userid);
+				final int userid = Integer.parseInt(tvUserID.getText().toString());
 				view.setBackgroundColor(Color.BLUE);
-				TextView tvName = (TextView) view
+				/*TextView tvName = (TextView) view
 						.findViewById(R.id.tv_list_name);
 				String strName = tvName.getText().toString();
 				AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(
@@ -160,7 +182,9 @@ public class MainActivity extends Activity {
 										// TODO Auto-generated method stub
 										view.setBackgroundColor(0xEEEEEE);
 									}
-								}).show();
+								}).show();*/
+				
+				showUserInfoDialog(userid);
 			}
 		});
 		
@@ -181,8 +205,8 @@ public class MainActivity extends Activity {
 						MainActivity.this);
 				dlgBuilder
 						.setTitle("提示")
-						.setMessage("你确定要删除：" + strName + "吗？")
-						.setPositiveButton("确定",
+						.setMessage("你可以对：" + strName + "用户做以下操作:")
+						.setPositiveButton("删除",
 								new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog,
@@ -260,6 +284,7 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -310,5 +335,71 @@ public class MainActivity extends Activity {
 			}
 		});
     	dlgBuilder.show();
+	}
+	
+	protected void showUserInfoDialog(int id) {
+		
+        // Create and show the dialog. 
+		if(userinfoDialog == null){
+			userinfoDialog = new UserInfoDialog();
+		}
+		
+			Bundle args = new Bundle();
+			args.putInt("userid", id);
+			userinfoDialog.setArguments(args);
+			//userinfoDialog.setInfoById(id);
+		
+		//userinfoDialog.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+		userinfoDialog.show(getSupportFragmentManager(), "dialog");
+	}
+	
+	@SuppressLint("ValidFragment")
+	public class UserInfoDialog extends DialogFragment {
+
+		private TextView tvUserName;
+		private TextView tvAge;
+		private Button btnCancel;
+		private int userid;
+
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			
+			userid = getArguments().getInt("userid");
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View v = inflater.inflate(R.layout.userinfo_show, container, false);
+			// 初始化控件
+			tvUserName = (TextView)v.findViewById(R.id.tvUserName);
+			tvAge = (TextView)v.findViewById(R.id.tvAge);
+			
+			setInfoById(userid);
+			
+			btnCancel = (Button) v.findViewById(R.id.btnCancel);
+			btnCancel.setOnClickListener(new Button.OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					// 关闭对话框
+					dismiss();
+				}
+			});
+			return v;
+		}
+		
+		public void setInfoById(int id){
+	
+			try {
+				usersDao = dataHelper.getUserDao();
+				Users user = usersDao.queryForId(id);
+				tvUserName.setText(user.getName());
+				tvAge.setText(String.valueOf(user.getAge()));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

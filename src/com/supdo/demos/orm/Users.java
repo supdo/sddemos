@@ -12,6 +12,8 @@ public class Users {
 	@DatabaseField
 	private int age;
 	@DatabaseField
+	private int sex;
+	@DatabaseField
 	private String company;
 	@DatabaseField
 	private String PhoneNum;
@@ -48,6 +50,14 @@ public class Users {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+	
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
 	}
 
 	public String getCompany() {

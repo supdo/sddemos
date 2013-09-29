@@ -11,5 +11,7 @@
     <string name="title_section6">Section 6</string>
     <string name="action_menu_logout">退出</string>
     <string name="title_activity_test_main">TestMainActivity</string>
+    
+    <string name="spn_sex_prompt">请选择性别</string>
 
 </resources>
