@@ -18,16 +18,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:padding="2dp"
+            android:shadowColor="#AAAAAA"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="0.01"
             android:text="添加新用户"
-            android:textColor="#00FF00"
+            android:textColor="#000000"
             android:textSize="30sp" />
 
         <LinearLayout
             android:id="@+id/NewUserFormContainer"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:background="@drawable/login_bg"
+            android:background="@drawable/edit_bg"
             android:orientation="vertical"
             android:padding="20dp" >
 

@@ -24,9 +24,12 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int login_bg=0x7f020001;
-        public static final int login_logo=0x7f020002;
+        public static final int btn_phone=0x7f020000;
+        public static final int btn_sms=0x7f020001;
+        public static final int edit_bg=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int login_bg=0x7f020004;
+        public static final int login_logo=0x7f020005;
     }
     public static final class id {
         public static final int NewUserFormContainer=0x7f090017;
@@ -35,20 +38,19 @@ public final class R {
         public static final int TextView06=0x7f09001e;
         public static final int TextView08=0x7f090024;
         public static final int TextView10=0x7f090026;
-        public static final int action_forgot_password=0x7f09002a;
-        public static final int action_settings=0x7f09002b;
+        public static final int action_forgot_password=0x7f090029;
+        public static final int action_settings=0x7f09002a;
         public static final int btnForgetPwd=0x7f09000d;
         public static final int btnNewUser=0x7f090003;
         public static final int btnNewUserOK=0x7f09001d;
-        public static final int btnPhone=0x7f090029;
         public static final int btnRegister=0x7f09000c;
-        public static final int btnSMS=0x7f090028;
         public static final int email=0x7f090008;
         public static final int etNewUserAge=0x7f090019;
         public static final int etNewUserComp=0x7f09001a;
         public static final int etNewUserName=0x7f090018;
         public static final int etNewUserPhoneNum=0x7f09001c;
-        public static final int imageView1=0x7f090007;
+        public static final int imgBtnPhone=0x7f090028;
+        public static final int imgBtnSMS=0x7f090007;
         public static final int login=0x7f09000a;
         public static final int login_form=0x7f090006;
         public static final int login_status=0x7f090004;
@@ -56,7 +58,7 @@ public final class R {
         public static final int lv_list1=0x7f090001;
         public static final int main_list_layout=0x7f090000;
         public static final int main_list_layout_btn=0x7f090002;
-        public static final int menu_logout=0x7f09002c;
+        public static final int menu_logout=0x7f09002b;
         public static final int new_user_form=0x7f090015;
         public static final int pager=0x7f09000e;
         public static final int pager_title=0x7f09000f;

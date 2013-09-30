@@ -2,8 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    android:orientation="vertical" >
+    android:layout_marginBottom="16dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,19 +105,24 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp" >
 
-        <Button
-            android:id="@+id/btnSMS"
-            android:layout_width="100dp"
+        <ImageButton
+            android:id="@+id/imgBtnSMS"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="短信" />
+            android:layout_marginLeft="6dp"
+            android:padding="10dp"
+            android:src="@drawable/btn_sms" />
 
-        <Button
-            android:id="@+id/btnPhone"
-            android:layout_width="100dp"
+        <ImageButton
+            android:id="@+id/imgBtnPhone"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="电话" />
+            android:layout_marginLeft="30dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/btn_phone" />
 
     </LinearLayout>
 

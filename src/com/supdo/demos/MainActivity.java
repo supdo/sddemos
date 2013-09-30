@@ -31,6 +31,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -360,8 +362,8 @@ public class MainActivity extends FragmentActivity  {
 		private TextView tvSex;
 		private TextView tvComp;
 		private TextView tvPhoneNum;
-		private Button btnSMS;
-		private Button btnPhone;
+		private ImageButton imgBtnSMS;
+		private ImageButton imgBtnPhone;
 		private int userid;
 
 		private void initialData(){
@@ -371,9 +373,10 @@ public class MainActivity extends FragmentActivity  {
 			tvSex = (TextView)view.findViewById(R.id.tvSex);
 			tvComp = (TextView)view.findViewById(R.id.tvComp);
 			tvPhoneNum = (TextView)view.findViewById(R.id.tvPhone);
-			btnSMS = (Button)view.findViewById(R.id.btnSMS);
-			btnPhone = (Button)view.findViewById(R.id.btnPhone);
-			btnSMS.setOnClickListener(new View.OnClickListener() {
+			imgBtnSMS = (ImageButton)view.findViewById(R.id.imgBtnSMS);
+			imgBtnPhone = (ImageButton)view.findViewById(R.id.imgBtnPhone);
+			
+			imgBtnSMS.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+tvPhoneNum.getText().toString()));
@@ -381,7 +384,7 @@ public class MainActivity extends FragmentActivity  {
 					startActivity(intent); 
 				}
 			});
-			btnPhone.setOnClickListener(new View.OnClickListener() {
+			imgBtnPhone.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tvPhoneNum.getText().toString()));
@@ -411,8 +414,8 @@ public class MainActivity extends FragmentActivity  {
 			Builder retDlg = new AlertDialog.Builder(getActivity());		    
 			retDlg.setView(view);
 			retDlg.setTitle("用户信息")
-			//.setPositiveButton("OK", null)
-			//.setNegativeButton("取消", null)
+			.setPositiveButton("OK", null)
+			.setNegativeButton("取消", null)
 			;
 			
 			return retDlg.create();
