@@ -27,13 +27,17 @@ public final class R {
         public static final int btn_phone=0x7f020000;
         public static final int btn_sms=0x7f020001;
         public static final int button_corner_10=0x7f020002;
-        public static final int edit_bg=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int login_bg=0x7f020005;
-        public static final int login_logo=0x7f020006;
-        public static final int shape_bottom_corner_no_top_line=0x7f020007;
-        public static final int shape_no_corner_without_bottom=0x7f020008;
-        public static final int shape_top_corner_no_bottom_line=0x7f020009;
+        public static final int button_corner_normal=0x7f020003;
+        public static final int edit_bg=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int login_bg=0x7f020006;
+        public static final int login_logo=0x7f020007;
+        public static final int shape_bottom_corner_no_top_line=0x7f020008;
+        public static final int shape_button_enable=0x7f020009;
+        public static final int shape_button_pressed=0x7f02000a;
+        public static final int shape_corner_line=0x7f02000b;
+        public static final int shape_no_corner_without_bottom=0x7f02000c;
+        public static final int shape_top_corner_no_bottom_line=0x7f02000d;
     }
     public static final class id {
         public static final int NewUserFormContainer=0x7f09001a;
@@ -92,7 +96,8 @@ public final class R {
         public static final int list_info=0x7f030004;
         public static final int new_login_layout=0x7f030005;
         public static final int new_user_layout=0x7f030006;
-        public static final int userinfo_show=0x7f030007;
+        public static final int test_connor_button=0x7f030007;
+        public static final int userinfo_show=0x7f030008;
     }
     public static final class menu {
         public static final int login=0x7f080000;
