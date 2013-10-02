@@ -21,6 +21,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.j256.ormlite.dao.Dao;
 import com.supdo.demos.orm.DataHelper;
@@ -46,7 +48,7 @@ public class MainActivity extends FragmentActivity  {
 	private ViewPager mViewPager;
 	private PagerTitleStrip mPagerTitle;
 	private View mListView1;
-	private View mNewLoginView1;
+	private View vFrontiaLogin;
 	private View mTestConorButton;
 	private View mDummyView1;
 	
@@ -65,6 +67,8 @@ public class MainActivity extends FragmentActivity  {
 	private Button btnNewUser;
 	
 	private UserInfoDialog userinfoDialog;
+	
+	private Button btnFrontiaLogin;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +92,19 @@ public class MainActivity extends FragmentActivity  {
 		//将要分页显示的View装入数组中
         mLists = LayoutInflater.from(this);
         mListView1 = mLists.inflate(R.layout.activity_list_1, null);
-        mNewLoginView1 = mLists.inflate(R.layout.new_login_layout, null);
+        vFrontiaLogin = mLists.inflate(R.layout.frontia_login_layout, null);
         mTestConorButton = mLists.inflate(R.layout.test_connor_button, null);
         mDummyView1 = mLists.inflate(R.layout.fragment_main_dummy, null);
         //每个页面的Title数据
         views = new ArrayList<View>();
         views.add(mListView1);
-        views.add(mNewLoginView1);
+        views.add(vFrontiaLogin);
         views.add(mTestConorButton);
         views.add(mDummyView1);
         
         titles = new ArrayList<String>();
         titles.add("用户列表");
-        titles.add("圆角登陆");
+        titles.add("Frontia测试");
         titles.add("测试圆角按钮");
         titles.add("Dummy内容");
         
@@ -133,8 +137,12 @@ public class MainActivity extends FragmentActivity  {
 		public Object instantiateItem(View container, int position) {
 			((ViewPager)container).addView(views.get(position));
 			switch (position) {
-			case 0:
-				initalList(views.get(position));
+				case 0:
+					initalList(views.get(position));
+					break;
+				case  1:
+					initialFrontia(vFrontiaLogin);
+					break;
 			}
 			return views.get(position);
 		}
@@ -262,6 +270,18 @@ public class MainActivity extends FragmentActivity  {
 		});
 	}
 
+	private void initialFrontia(View view){
+		btnFrontiaLogin = (Button)view.findViewById(R.id.btnFrontiaLogin);
+		btnFrontiaLogin.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast toast = Toast.makeText(getApplicationContext(),"点击了登录", Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.BOTTOM, 0, 0);
+				toast.show();
+			}
+		});
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 		if(requestCode == 101 || requestCode == 105){

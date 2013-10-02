@@ -109,7 +109,7 @@ public class NewUserActivity extends Activity {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				Toast toast = Toast.makeText(getApplicationContext(),"添加成功", Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(getApplicationContext(),"添加成功", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 					   
