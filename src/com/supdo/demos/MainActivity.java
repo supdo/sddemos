@@ -46,6 +46,8 @@ public class MainActivity extends FragmentActivity  {
 	private ViewPager mViewPager;
 	private PagerTitleStrip mPagerTitle;
 	private View mListView1;
+	private View mNewLoginView1;
+	private View mTestConorButton;
 	private View mDummyView1;
 	
 	private LayoutInflater mLists;
@@ -86,14 +88,20 @@ public class MainActivity extends FragmentActivity  {
 		//将要分页显示的View装入数组中
         mLists = LayoutInflater.from(this);
         mListView1 = mLists.inflate(R.layout.activity_list_1, null);
+        mNewLoginView1 = mLists.inflate(R.layout.new_login_layout, null);
+        mTestConorButton = mLists.inflate(R.layout.test_connor_button, null);
         mDummyView1 = mLists.inflate(R.layout.fragment_main_dummy, null);
         //每个页面的Title数据
         views = new ArrayList<View>();
         views.add(mListView1);
+        views.add(mNewLoginView1);
+        views.add(mTestConorButton);
         views.add(mDummyView1);
         
         titles = new ArrayList<String>();
-        titles.add("列表内容");
+        titles.add("用户列表");
+        titles.add("圆角登陆");
+        titles.add("测试圆角按钮");
         titles.add("Dummy内容");
         
         mViewPager.setAdapter(mPagerAdapter);
