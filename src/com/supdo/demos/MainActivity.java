@@ -25,14 +25,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -263,11 +261,13 @@ public class MainActivity extends FragmentActivity  {
 				initalListData();
 				listItemAdapter.notifyDataSetChanged();
 				
-				AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
+				
+				
+				/**AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(this);
 		    	dlgBuilder.setMessage("添加成功！");
 		    	dlgBuilder.setTitle("提示");
 		    	dlgBuilder.setNegativeButton("确定", null);
-		    	dlgBuilder.show();
+		    	dlgBuilder.show();**/
 			}
 		}
 	}

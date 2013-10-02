@@ -8,12 +8,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.j256.ormlite.dao.Dao;
 import com.supdo.demos.orm.DataHelper;
@@ -107,6 +109,10 @@ public class NewUserActivity extends Activity {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				Toast toast = Toast.makeText(getApplicationContext(),"添加成功", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+					   
 				Intent intent = new Intent(NewUserActivity.this,
 						MainActivity.class);
 				// startActivity(intent);
