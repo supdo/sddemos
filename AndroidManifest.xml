@@ -7,12 +7,17 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
-	<uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>  
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.CALL_PHONE" />  
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="com.supdo.demos.LoginActivity"
             android:label="@string/app_name"
@@ -37,6 +42,7 @@
             android:name="com.supdo.demos.TestMainActivity"
             android:label="@string/title_activity_test_main" >
         </activity>
+        <activity android:name="FrontiaActivity"></activity>
     </application>
 
 </manifest>

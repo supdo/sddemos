@@ -4,13 +4,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ActionBar.OnNavigationListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -43,7 +48,7 @@ public class NewUserActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 隐藏标题栏
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.new_user_layout);
 		
 		findViews();
@@ -62,6 +67,22 @@ public class NewUserActivity extends Activity {
 	}
 	
 	private void initialActivity(){
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP|ActionBar.DISPLAY_SHOW_HOME);
+		final String[] actions = new String[] { "Bookmark", "Subscribe", "Share" };  
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),
+				android.R.layout.simple_spinner_dropdown_item, actions);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		actionBar.setListNavigationCallbacks(adapter, new OnNavigationListener() {
+			@Override
+			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				Toast.makeText(getBaseContext(),"You selected : " + actions[itemPosition],Toast.LENGTH_SHORT)
+				.show();
+				return false;
+			}
+		});
+		
 		dataHelper = new DataHelper(NewUserActivity.this);
 		
 		Bundle bundle=getIntent().getExtras();
@@ -169,5 +190,17 @@ public class NewUserActivity extends Activity {
 		}else{
 			return true;
 		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.edit_user_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
 	}
 }

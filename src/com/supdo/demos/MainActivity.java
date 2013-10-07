@@ -278,6 +278,8 @@ public class MainActivity extends FragmentActivity  {
 				Toast toast = Toast.makeText(getApplicationContext(),"点击了登录", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
+				Intent intent = new Intent(MainActivity.this, FrontiaActivity.class);
+				startActivityForResult(intent, 102);
 			}
 		});
 	}
