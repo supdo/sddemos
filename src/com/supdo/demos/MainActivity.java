@@ -37,6 +37,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.frontia.Frontia;
 import com.j256.ormlite.dao.Dao;
 import com.supdo.demos.orm.DataHelper;
 import com.supdo.demos.orm.Users;
@@ -70,12 +71,17 @@ public class MainActivity extends FragmentActivity  {
 	
 	private Button btnFrontiaLogin;
 	
+	private final static String APIKEY = "LMG2xVcHCpZ4qXe3QZADOAIa";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//隐藏标题栏
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		
+		boolean isInit = Frontia.init(this.getApplicationContext(), APIKEY);
+
 		
 		findViews();
 		initialActivity();
@@ -278,8 +284,10 @@ public class MainActivity extends FragmentActivity  {
 				Toast toast = Toast.makeText(getApplicationContext(),"点击了登录", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.BOTTOM, 0, 0);
 				toast.show();
-				Intent intent = new Intent(MainActivity.this, FrontiaActivity.class);
-				startActivityForResult(intent, 102);
+				
+				
+				FrontiaAuth auth = new FrontiaAuth(MainActivity.this);
+				auth.auth();
 			}
 		});
 	}

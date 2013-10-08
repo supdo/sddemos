@@ -53,23 +53,25 @@ public class FrontiaActivity extends Activity {
 
 	private void initialActivity() {
 		//初始化Frontia
-		Frontia.init(this.getApplicationContext(), APIKEY);
-		mCloudStorage = Frontia.getStorage();
+//		boolean isInit = Frontia.init(this.getApplicationContext(), APIKEY);
+//		if(isInit){
+//			mCloudStorage = Frontia.getStorage();
+//		}
 		
-		final String[] actions = new String[] { "应用数据", "个人数据", "个人文件" };  
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP|ActionBar.DISPLAY_SHOW_HOME);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),
-				android.R.layout.simple_spinner_dropdown_item, actions);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		actionBar.setListNavigationCallbacks(adapter, new OnNavigationListener() {
-			@Override
-			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				Toast.makeText(getBaseContext(),"You selected : " + actions[itemPosition],Toast.LENGTH_SHORT)
-				.show();
-				return false;
-			}
-		});
+//		final String[] actions = new String[] { "应用数据", "个人数据", "个人文件" };  
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP|ActionBar.DISPLAY_SHOW_HOME);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),
+//				android.R.layout.simple_spinner_dropdown_item, actions);
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//		actionBar.setListNavigationCallbacks(adapter, new OnNavigationListener() {
+//			@Override
+//			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+//				Toast.makeText(getBaseContext(),"You selected : " + actions[itemPosition],Toast.LENGTH_SHORT)
+//				.show();
+//				return false;
+//			}
+//		});
 	}
 
 	private void setListeners() {
