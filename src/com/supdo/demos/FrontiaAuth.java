@@ -12,6 +12,7 @@ import com.baidu.frontia.api.FrontiaAuthorization;
 import com.baidu.frontia.api.FrontiaAuthorizationListener;
 
 public class FrontiaAuth {
+	public boolean isInit = false;
 	private final static String APPID = "1072676";
 	private final static String APIKEY = "LMG2xVcHCpZ4qXe3QZADOAIa";
 	private final  Activity mContext;
@@ -19,7 +20,7 @@ public class FrontiaAuth {
 	public FrontiaAuth(Activity activity){
 		mContext = activity;
 		try{
-			Frontia.init(mContext.getApplicationContext(), APIKEY);
+			isInit = Frontia.init(mContext.getApplicationContext(), APIKEY);
 		}catch(Exception ex){
 			ex.toString();
 		}

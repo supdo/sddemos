@@ -37,7 +37,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.frontia.Frontia;
 import com.j256.ormlite.dao.Dao;
 import com.supdo.demos.orm.DataHelper;
 import com.supdo.demos.orm.Users;
@@ -71,7 +70,6 @@ public class MainActivity extends FragmentActivity  {
 	
 	private Button btnFrontiaLogin;
 	
-	private final static String APIKEY = "LMG2xVcHCpZ4qXe3QZADOAIa";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +77,6 @@ public class MainActivity extends FragmentActivity  {
 		//隐藏标题栏
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		
-		boolean isInit = Frontia.init(this.getApplicationContext(), APIKEY);
-
 		
 		findViews();
 		initialActivity();
@@ -280,14 +275,15 @@ public class MainActivity extends FragmentActivity  {
 		btnFrontiaLogin = (Button)view.findViewById(R.id.btnFrontiaLogin);
 		btnFrontiaLogin.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				Toast toast = Toast.makeText(getApplicationContext(),"点击了登录", Toast.LENGTH_SHORT);
-				toast.setGravity(Gravity.BOTTOM, 0, 0);
-				toast.show();
-				
-				
-				FrontiaAuth auth = new FrontiaAuth(MainActivity.this);
-				auth.auth();
+			public void onClick(View v) {		
+				FrontiaAuth drontiaAuth = new FrontiaAuth(MainActivity.this);
+				if(drontiaAuth.isInit){
+					drontiaAuth.auth();
+				}else{
+					Toast toast = Toast.makeText(getApplicationContext(),"Frontia初始化失败了。", Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.BOTTOM, 0, 0);
+					toast.show();
+				}
 			}
 		});
 	}

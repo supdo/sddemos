@@ -19,7 +19,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:name="com.baidu.frontia.FrontiaApplication"
+        >
         <activity
             android:name="com.supdo.demos.LoginActivity"
             android:label="@string/app_name"
@@ -44,7 +46,7 @@
             android:name="com.supdo.demos.TestMainActivity"
             android:label="@string/title_activity_test_main" >
         </activity>
-        <activity android:name="FrontiaActivity" >
+        <activity android:name="com.supdo.demos.FrontiaActivity" >
         </activity>
     </application>
 
