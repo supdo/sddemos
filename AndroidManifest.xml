@@ -20,7 +20,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
-        android:name="com.baidu.frontia.FrontiaApplication"
+        android:name="com.supdo.demos.SDApplication"
         >
         <activity
             android:name="com.supdo.demos.LoginActivity"

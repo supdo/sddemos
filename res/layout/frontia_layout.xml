@@ -1,293 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
 
-    <LinearLayout
-        android:id="@+id/appdataLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:orientation="vertical"
-        android:padding="20dp" >
 
-        <!-- 表格布局 -->
+    <merge
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-
-            <!-- 表格布局：第一行 -->
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_top_corner_no_bottom_line"
-                android:padding="10dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_horizontal"
-                    android:layout_marginRight="10dip"
-                    android:text="姓名:" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/etUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:singleLine="true" >
-                </EditText>
-            </TableRow>
-            <!-- 表格布局：第二行 -->
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_no_corner_without_bottom"
-                android:padding="10dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_horizontal"
-                    android:layout_marginRight="10dip"
-                    android:text="密码:" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/etPassWord"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:inputType="phone"
-                    android:singleLine="true" >
-                </EditText>
-            </TableRow>
-            <!-- 表格布局：第三行 -->
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_bottom_corner_no_top_line"
-                android:padding="10dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="10dip"
-                    android:text="联系电话:" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/etPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:inputType="phone"
-                    android:singleLine="true" >
-                </EditText>
-            </TableRow>
-        </TableLayout>
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF" >
 
         <LinearLayout
+            android:id="@+id/appdataLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="20dp" >
 
-            <Button
-                android:id="@+id/btnSaveUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/corner_button_normal"
-                android:minHeight="38dip"
-                android:padding="10dp"
-                android:text="保存用户" />
+            <!-- 表格布局 -->
 
-            <Button
-                android:id="@+id/btnFindUser"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/corner_button_normal"
-                android:minHeight="38dip"
-                android:padding="10dp"
-                android:text="查找用户" />
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <!-- 表格布局：第一行 -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_top_corner_no_bottom_line"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_horizontal"
+                        android:layout_marginRight="10dip"
+                        android:text="姓名:" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/etUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true" >
+                    </EditText>
+                </TableRow>
+                <!-- 表格布局：第二行 -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_no_corner_without_bottom"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_horizontal"
+                        android:layout_marginRight="10dip"
+                        android:text="密码:" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/etPassWord"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="phone"
+                        android:singleLine="true" >
+                    </EditText>
+                </TableRow>
+                <!-- 表格布局：第三行 -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bottom_corner_no_top_line"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dip"
+                        android:text="联系电话:" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="phone"
+                        android:singleLine="true" >
+                    </EditText>
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btnSaveUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/corner_button_normal"
+                    android:minHeight="38dip"
+                    android:padding="10dp"
+                    android:text="保存用户" />
+
+                <Button
+                    android:id="@+id/btnFindUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/corner_button_normal"
+                    android:minHeight="38dip"
+                    android:padding="10dp"
+                    android:text="查找用户" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btnFind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/corner_button_normal"
+                    android:minHeight="38dip"
+                    android:padding="10dp"
+                    android:text="查找" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/corner_button_normal"
+                    android:minHeight="38dip"
+                    android:padding="10dp"
+                    android:text="保存" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
+            android:id="@+id/roleLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:visibility="gone" >
 
-            <Button
-                android:id="@+id/btnFind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/corner_button_normal"
-                android:minHeight="38dip"
-                android:padding="10dp"
-                android:text="查找" />
+            <!-- 表格布局 -->
 
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/corner_button_normal"
-                android:minHeight="38dip"
-                android:padding="10dp"
-                android:text="保存" />
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <!-- 表格布局：第一行 -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_top_corner_no_bottom_line"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_horizontal"
+                        android:layout_marginRight="10dip"
+                        android:text="姓名:" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/etUserName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true" >
+                    </EditText>
+                </TableRow>
+                <!-- 表格布局：第二行 -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_no_corner_without_bottom"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_horizontal"
+                        android:layout_marginRight="10dip"
+                        android:text="联系电话:" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/etPhone2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="phone"
+                        android:singleLine="true" >
+                    </EditText>
+                </TableRow>
+                <!-- 表格布局：第三行 -->
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_bottom_corner_no_top_line"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dip"
+                        android:text="联系电话:" >
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/etPhone1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="phone"
+                        android:singleLine="true" >
+                    </EditText>
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btnCrtRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/corner_button_normal"
+                    android:minHeight="38dip"
+                    android:padding="10dp"
+                    android:text="创建角色" />
+
+                <Button
+                    android:id="@+id/btnCrtUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/corner_button_normal"
+                    android:minHeight="38dip"
+                    android:padding="10dp"
+                    android:text="创建用户" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvRoleInfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
+    </merge>
 
-        <TextView
-            android:id="@+id/tvInfo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    
-    <LinearLayout
-        android:id="@+id/roleLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:visibility="gone" >
-
-        <!-- 表格布局 -->
-
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-
-            <!-- 表格布局：第一行 -->
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_top_corner_no_bottom_line"
-                android:padding="10dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_horizontal"
-                    android:layout_marginRight="10dip"
-                    android:text="姓名:" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/etUserName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:singleLine="true" >
-                </EditText>
-            </TableRow>
-            <!-- 表格布局：第二行 -->
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_no_corner_without_bottom"
-                android:padding="10dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_horizontal"
-                    android:layout_marginRight="10dip"
-                    android:text="联系电话:" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/etPhone2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:inputType="phone"
-                    android:singleLine="true" >
-                </EditText>
-            </TableRow>
-            <!-- 表格布局：第三行 -->
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_bottom_corner_no_top_line"
-                android:padding="10dip" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="10dip"
-                    android:text="联系电话:" >
-                </TextView>
-
-                <EditText
-                    android:id="@+id/etPhone1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:inputType="phone"
-                    android:singleLine="true" >
-                </EditText>
-            </TableRow>
-        </TableLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/btnCrtRole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/corner_button_normal"
-                android:padding="10dp"
-                android:minHeight="38dip"
-                android:text="创建角色" />
-
-            <Button
-                android:id="@+id/btnCrtUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/corner_button_normal"
-                android:padding="10dp"
-                android:minHeight="38dip"
-                android:text="创建用户" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvRoleInfo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</merge>
